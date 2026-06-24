@@ -6,7 +6,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import java.util.List;
-import org.upc.open.software.source.g2.models.LoadingUnloadingDetail;
+import org.upc.open.software.source.g2.models.persistence.LoadingUnloadingDetail;
 import org.upc.open.software.source.g2.models.responses.LoadingUnloadingDetailResponse;
 import org.upc.open.software.source.g2.services.LoadingUnloadingDetailService;
 
