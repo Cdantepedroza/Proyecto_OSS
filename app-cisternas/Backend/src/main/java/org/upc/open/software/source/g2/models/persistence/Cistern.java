@@ -61,48 +61,4 @@ public class Cistern {
             updatable = false
     )
     private LocalDateTime fechaRegistro;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    public BigDecimal getCapacidadM3() {
-        return capacidadM3;
-    }
-
-    public void setCapacidadM3(BigDecimal capacidadM3) {
-        this.capacidadM3 = capacidadM3;
-    }
-
-    public String getEstadoOperativo() {
-        return estadoOperativo;
-    }
-
-    public void setEstadoOperativo(String estadoOperativo) {
-        this.estadoOperativo = estadoOperativo;
-    }
-
-    public Boolean getDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(Boolean disponible) {
-        this.disponible = disponible;
-    }
-
-    public LocalDateTime getFechaRegistro() {
-        return fechaRegistro;
-    }
 }
