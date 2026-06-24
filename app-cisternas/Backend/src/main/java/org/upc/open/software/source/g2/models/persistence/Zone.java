@@ -1,4 +1,4 @@
-package org.upc.open.software.source.g2.models;
+package org.upc.open.software.source.g2.models.persistence;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
