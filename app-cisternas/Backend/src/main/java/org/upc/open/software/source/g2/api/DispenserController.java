@@ -7,7 +7,7 @@ import java.util.List;
 import org.upc.open.software.source.g2.models.responses.DispenserResponse;
 import org.upc.open.software.source.g2.services.DispenserService;
 
-@Path("/dispenser")
+@Path("/minaya/surtidor")
 public class DispenserController {
 
     private final DispenserService dispenserService;
@@ -19,7 +19,6 @@ public class DispenserController {
 
 
     @GET
-    @Path("/dispensers")
     public List<DispenserResponse> getDispensers() {
         return dispenserService.getDispensers();
     }
