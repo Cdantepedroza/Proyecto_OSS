@@ -5,7 +5,7 @@ import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import org.upc.open.software.source.g2.models.VehicleDocument;
+import org.upc.open.software.source.g2.models.persistence.VehicleDocument;
 import org.upc.open.software.source.g2.models.responses.VehicleDocumentResponse;
 import org.upc.open.software.source.g2.services.VehicleDocumentService;
 

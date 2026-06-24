@@ -10,7 +10,7 @@ import org.upc.open.software.source.g2.models.responses.VehicleDocumentResponse;
 import org.upc.open.software.source.g2.services.VehicleDocumentService;
 
 @RequiredArgsConstructor
-@Path("/vehicle-documents")
+@Path("/minaya/vehiculos")
 @Produces(MediaType.APPLICATION_JSON)
 public class VehicleDocumentController {
 
