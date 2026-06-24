@@ -1,0 +1,190 @@
+<section class="page-content usuarios-page">
+  <app-page-header
+    title="Administracion de Usuarios"
+    description="Gestiona el acceso, roles y estados de los usuarios del sistema."
+  >
+    <button class="primary-button" type="button" (click)="abrirModal()">
+      <span class="material-symbols-outlined">person_add</span>
+      Nuevo usuario
+    </button>
+  </app-page-header>
+
+  <article class="content-card filters-card">
+    <div class="field">
+      <label for="rol">Filtrar por rol</label>
+      <select id="rol">
+        <option>Todos los roles</option>
+        <option>ADMIN</option>
+        <option>CONDUCTOR</option>
+        <option>LOGISTICA</option>
+        <option>SUPERVISOR</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="estado">Filtrar por estado</label>
+      <select id="estado">
+        <option>Todos los estados</option>
+        <option>ACTIVO</option>
+        <option>BLOQUEADO</option>
+        <option>PENDIENTE_ACTIVACION</option>
+      </select>
+    </div>
+
+    <div class="filter-buttons">
+      <button class="secondary-button square-button" type="button" aria-label="Filtrar">
+        <span class="material-symbols-outlined">filter_list</span>
+      </button>
+      <button class="secondary-button square-button" type="button" aria-label="Descargar">
+        <span class="material-symbols-outlined">file_download</span>
+      </button>
+    </div>
+  </article>
+
+  <article class="content-card users-table-card">
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Fecha de creacion</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of usuarios; track usuario.correo) {
+            <tr>
+              <td>
+                <div class="user-cell">
+                  <div class="avatar-small">{{ usuario.iniciales }}</div>
+                  <strong>{{ usuario.nombre }}</strong>
+                </div>
+              </td>
+              <td>{{ usuario.correo }}</td>
+              <td><span class="role-pill">{{ usuario.rol }}</span></td>
+              <td><app-status-badge [status]="usuario.estado" /></td>
+              <td>{{ usuario.fechaCreacion }}</td>
+              <td class="text-right">
+                @if (usuario.estado === 'BLOQUEADO') {
+                  <button class="link-action" type="button">Activar cuenta</button>
+                } @else if (usuario.estado === 'PENDIENTE_ACTIVACION') {
+                  <button class="link-action" type="button">Reenviar invitacion</button>
+                } @else {
+                  <button class="icon-action" type="button" aria-label="Editar usuario">
+                    <span class="material-symbols-outlined">edit</span>
+                  </button>
+                }
+                <button class="icon-action" type="button" aria-label="Mas opciones">
+                  <span class="material-symbols-outlined">more_vert</span>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="table-footer">
+      <p>Mostrando 1-5 de 24 usuarios</p>
+      <div class="pagination">
+        <button type="button"><span class="material-symbols-outlined">chevron_left</span></button>
+        <button class="active" type="button">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <button type="button"><span class="material-symbols-outlined">chevron_right</span></button>
+      </div>
+    </footer>
+  </article>
+
+  <div class="stats-grid">
+    <article class="content-card stat-card">
+      <span>Total usuarios</span>
+      <div>
+        <strong>24</strong>
+        <span class="material-symbols-outlined blue">groups</span>
+      </div>
+      <p class="green">+3 este mes</p>
+    </article>
+
+    <article class="content-card stat-card">
+      <span>Activos</span>
+      <div>
+        <strong>18</strong>
+        <span class="material-symbols-outlined green">check_circle</span>
+      </div>
+      <p>75% del total</p>
+    </article>
+
+    <article class="content-card stat-card">
+      <span>Pendientes</span>
+      <div>
+        <strong>4</strong>
+        <span class="material-symbols-outlined amber">pending</span>
+      </div>
+      <p>Requieren atencion</p>
+    </article>
+
+    <article class="content-card stat-card">
+      <span>Bloqueados</span>
+      <div>
+        <strong>2</strong>
+        <span class="material-symbols-outlined red">block</span>
+      </div>
+      <p class="red">Revisar accesos</p>
+    </article>
+  </div>
+
+  @if (mostrarModal) {
+    <div class="modal-backdrop">
+      <article class="observation-modal user-modal">
+        <header>
+          <h3>Nuevo usuario</h3>
+          <button class="icon-action" type="button" (click)="cerrarModal()">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </header>
+
+        <form class="modal-body" (ngSubmit)="crearUsuario()">
+          <div class="field">
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" name="nombre" type="text" required [(ngModel)]="nuevoUsuario.nombre" />
+          </div>
+
+          <div class="field">
+            <label for="correo">Correo electronico</label>
+            <input id="correo" name="correo" type="email" required [(ngModel)]="nuevoUsuario.correo" />
+          </div>
+
+          <div class="modal-grid">
+            <div class="field">
+              <label for="rolUsuario">Rol</label>
+              <select id="rolUsuario" name="rolUsuario" [(ngModel)]="nuevoUsuario.rol">
+                <option>CONDUCTOR</option>
+                <option>LOGISTICA</option>
+                <option>SUPERVISOR</option>
+                <option>ADMIN</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="sede">Empresa/Sede</label>
+              <select id="sede" name="sede" [(ngModel)]="nuevoUsuario.sede">
+                <option>Principal</option>
+                <option>Norte</option>
+                <option>Sur</option>
+              </select>
+            </div>
+          </div>
+
+          <footer class="button-group-equal">
+            <button class="secondary-button" type="button" (click)="cerrarModal()">Cancelar</button>
+            <button class="primary-button" type="submit">Crear usuario</button>
+          </footer>
+        </form>
+      </article>
+    </div>
+  }
+</section>

@@ -1,0 +1,236 @@
+.mis-viajes-page {
+  display: grid;
+  gap: 24px;
+}
+
+.driver-summary {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.95fr) minmax(0, 1.6fr);
+  gap: 18px;
+}
+
+.profile-card,
+.summary-card,
+.active-trip-card,
+.trips-card {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.05);
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+
+  span {
+    color: #505f76;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 3px 0;
+    color: #111c2d;
+    font-size: 22px;
+  }
+
+  p {
+    margin: 0;
+    color: #505f76;
+  }
+}
+
+.profile-avatar {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  place-items: center;
+  border-radius: 16px;
+  background: #143de7;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+
+  span:not(.material-symbols-outlined) {
+    display: block;
+    color: #505f76;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  strong {
+    display: block;
+    margin-top: 6px;
+    color: #111c2d;
+    font-size: 28px;
+  }
+
+  .material-symbols-outlined {
+    font-size: 30px;
+  }
+
+  &.blue .material-symbols-outlined {
+    color: #143de7;
+  }
+
+  &.orange .material-symbols-outlined {
+    color: #d97706;
+  }
+
+  &.red .material-symbols-outlined {
+    color: #ba1a1a;
+  }
+
+  &.green .material-symbols-outlined {
+    color: #059669;
+  }
+}
+
+.active-trip-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-left: 4px solid #143de7;
+  padding: 22px;
+
+  h3 {
+    margin: 4px 0 6px;
+    color: #111c2d;
+    font-size: 20px;
+  }
+
+  p {
+    max-width: 760px;
+    margin: 0;
+    color: #505f76;
+  }
+}
+
+.eyebrow {
+  color: #143de7;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.trips-card {
+  overflow: hidden;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #d8e3fb;
+  background: #f0f3ff;
+  padding: 18px 22px;
+
+  h3 {
+    margin: 0;
+    color: #111c2d;
+    font-size: 20px;
+  }
+
+  p {
+    margin: 4px 0 0;
+    color: #505f76;
+  }
+}
+
+table {
+  th,
+  td {
+    padding: 17px 22px;
+  }
+
+  td span:not(.material-symbols-outlined) {
+    display: block;
+    color: #505f76;
+    font-size: 12px;
+  }
+
+  tr:hover {
+    background: #f8fbff;
+  }
+}
+
+.folio,
+.vehicle-cell {
+  color: #143de7;
+  font-weight: 800;
+}
+
+.vehicle-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-button {
+  min-width: 122px;
+  min-height: 36px;
+
+  &.warning {
+    border-color: #fed7aa;
+    background: #ffedd5;
+    color: #c2410c;
+  }
+}
+
+.observation-row td {
+  border-top: 0;
+  background: #fff7ed;
+  color: #c2410c;
+  font-size: 13px;
+
+  .material-symbols-outlined {
+    margin-right: 6px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .driver-summary,
+  .summary-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .driver-summary,
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .active-trip-card,
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .active-trip-card .primary-button,
+  .section-heading .secondary-button {
+    width: 100%;
+  }
+}

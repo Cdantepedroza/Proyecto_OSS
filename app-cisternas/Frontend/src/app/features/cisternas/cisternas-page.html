@@ -1,0 +1,136 @@
+<section class="page-content">
+  <app-page-header
+    title="Gestion de Cisternas"
+    description="Supervisa y administra la flota operativa de transporte de agua."
+  >
+    <button class="primary-button" type="button">
+      <span class="material-symbols-outlined">add</span>
+      Nueva cisterna
+    </button>
+  </app-page-header>
+
+  <div class="summary-grid">
+    <article class="filter-card">
+      <span class="filter-label">Filtros</span>
+      <div class="filter-actions">
+        <button class="filter active" type="button">Disponible</button>
+        <button class="filter" type="button">Mantenimiento</button>
+        <button class="filter" type="button">No disponible</button>
+      </div>
+    </article>
+
+    <article class="stats-card">
+      <div>
+        <strong>24</strong>
+        <span>Total</span>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <strong class="green">18</strong>
+        <span>Activas</span>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <strong class="red">2</strong>
+        <span>Baja</span>
+      </div>
+    </article>
+  </div>
+
+  <article class="table-card">
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Placa</th>
+            <th>Capacidad</th>
+            <th>Estado Operativo</th>
+            <th>Disponible</th>
+            <th class="text-center">Documentos</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cisterna of cisternas; track cisterna.placa) {
+            <tr>
+              <td>
+                <div class="plate-cell">
+                  <div class="truck-icon">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                  </div>
+                  <strong>{{ cisterna.placa }}</strong>
+                </div>
+              </td>
+              <td>{{ cisterna.capacidad }}</td>
+              <td><app-status-badge [status]="cisterna.estado" /></td>
+              <td>
+                <span class="availability" [class.available]="cisterna.disponible">
+                  <span></span>
+                  {{ cisterna.disponible ? 'SI' : 'NO' }}
+                </span>
+              </td>
+              <td class="text-center">
+                <button class="icon-action primary" type="button">
+                  <span class="material-symbols-outlined">folder_open</span>
+                </button>
+              </td>
+              <td class="text-right">
+                <button class="icon-action" type="button">
+                  <span class="material-symbols-outlined">edit</span>
+                </button>
+                <button class="icon-action danger" type="button">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="table-footer">
+      <p>Mostrando 1-4 de 24 cisternas registradas</p>
+      <div class="pagination">
+        <button type="button"><span class="material-symbols-outlined">chevron_left</span></button>
+        <button class="active" type="button">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <button type="button"><span class="material-symbols-outlined">chevron_right</span></button>
+      </div>
+    </footer>
+  </article>
+
+  <div class="insight-grid">
+    <article class="insight-card">
+      <div class="insight-icon blue">
+        <span class="material-symbols-outlined">priority_high</span>
+      </div>
+      <div>
+        <h3>Vencimiento de SOAT</h3>
+        <p>3 cisternas tienen seguros por vencer en los proximos 15 dias.</p>
+        <button type="button">Ver detalles</button>
+      </div>
+    </article>
+
+    <article class="insight-card">
+      <div class="insight-icon gray">
+        <span class="material-symbols-outlined">build</span>
+      </div>
+      <div>
+        <h3>Mantenimiento Programado</h3>
+        <p>Cisterna XYZ-789 esta en taller por cambio de aceite y frenos.</p>
+        <button type="button">Cronograma</button>
+      </div>
+    </article>
+
+    <article class="insight-card">
+      <div class="insight-icon green">
+        <span class="material-symbols-outlined">task_alt</span>
+      </div>
+      <div>
+        <h3>Disponibilidad Optima</h3>
+        <p>75% de la flota se encuentra actualmente operativa y disponible.</p>
+      </div>
+    </article>
+  </div>
+</section>

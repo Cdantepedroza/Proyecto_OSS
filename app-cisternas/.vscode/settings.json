@@ -1,0 +1,14 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "app-cisternas\\Frontend\\",
+            "isFolderOnly": true,
+            "color": "foldercolorizer.color_008080"
+        },
+        {
+            "folderPath": "app-cisternas\\Backend\\",
+            "isFolderOnly": true,
+            "color": "foldercolorizer.color_d78700"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+.main-panel {
+  min-height: 100vh;
+  margin-left: 260px;
+  transition: margin-left 180ms ease;
+}
+
+.sidebar-collapsed {
+  .main-panel {
+    margin-left: 84px;
+  }
+}
+
+@media (max-width: 760px) {
+  .main-panel {
+    margin-left: 0;
+  }
+}

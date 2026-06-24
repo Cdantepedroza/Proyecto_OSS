@@ -1,0 +1,12 @@
+<article class="kpi-card">
+  <div class="kpi-icon" [class.blue]="color === 'blue'" [class.orange]="color === 'orange'" [class.green]="color === 'green'">
+    <span class="material-symbols-outlined">{{ icon }}</span>
+  </div>
+
+  @if (trend) {
+    <span class="kpi-trend">{{ trend }}</span>
+  }
+
+  <p>{{ title }}</p>
+  <strong [class.text-orange]="color === 'orange'" [class.text-green]="color === 'green'">{{ value }}</strong>
+</article>

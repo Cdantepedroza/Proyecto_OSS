@@ -1,0 +1,41 @@
+<aside class="sidebar" [class.collapsed]="collapsed">
+  <div class="brand">
+    <div class="brand-icon">
+      <span class="material-symbols-outlined">water_drop</span>
+    </div>
+    <div class="brand-copy">
+      <h1>Minaya</h1>
+      <p>Gestion de Cisternas</p>
+    </div>
+    <button
+      class="collapse-button"
+      type="button"
+      [attr.aria-label]="collapsed ? 'Expandir menu' : 'Contraer menu'"
+      (click)="onToggleCollapsed()"
+    >
+      <span class="material-symbols-outlined">{{ collapsed ? 'chevron_right' : 'chevron_left' }}</span>
+    </button>
+  </div>
+
+  <nav class="nav-list">
+    @for (item of navItems; track item.route) {
+      <a
+        class="nav-item"
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+      >
+        <span class="material-symbols-outlined">{{ item.icon }}</span>
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="user-card">
+    <div class="avatar">AU</div>
+    <div class="user-copy">
+      <strong>Admin User</strong>
+      <span>admin&#64;minaya.pe</span>
+    </div>
+  </div>
+</aside>

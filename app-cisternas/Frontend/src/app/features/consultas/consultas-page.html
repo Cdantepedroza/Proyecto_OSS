@@ -1,0 +1,182 @@
+<section class="page-content consultas-page">
+  <app-page-header
+    title="Historial de Viajes"
+    description="Consulta los viajes registrados, revisa estados y filtra la operacion por fecha, cisterna o conductor."
+  >
+    <button class="primary-button" type="button" routerLink="/viajes/cierre">
+      <span class="material-symbols-outlined">add</span>
+      Nuevo viaje
+    </button>
+  </app-page-header>
+
+  <article class="content-card filters-card">
+    <div class="field">
+      <label for="fecha">Rango de fechas</label>
+      <input id="fecha" type="date" />
+    </div>
+
+    <div class="field">
+      <label for="placa">Placa / matricula</label>
+      <input id="placa" placeholder="Ej: ABC-123" type="text" />
+    </div>
+
+    <div class="field">
+      <label for="conductor">Conductor</label>
+      <select id="conductor">
+        <option>Todos los conductores</option>
+        <option>Juan Perez</option>
+        <option>Carlos Rodriguez</option>
+        <option>Maria Lopez</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="surtidor">Surtidor</label>
+      <select id="surtidor">
+        <option>Todos los surtidores</option>
+        <option>Estacion Norte</option>
+        <option>Planta Principal</option>
+        <option>Base Sur</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="zona">Zona de destino</label>
+      <select id="zona">
+        <option>Todas las zonas</option>
+        <option>Sector A Residencial</option>
+        <option>Sector B Industrial</option>
+        <option>Sector C Rural</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Tipo de liquido</label>
+      <div class="segmented-control">
+        <button class="active" type="button">Agua potable</button>
+        <button type="button">Industrial</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="estado">Estado del viaje</label>
+      <select id="estado">
+        <option>Cualquier estado</option>
+        <option>Completado</option>
+        <option>En progreso</option>
+        <option>Pendiente</option>
+        <option>Cancelado</option>
+      </select>
+    </div>
+
+    <div class="button-group-equal search-actions">
+      <button class="primary-button" type="button">
+        <span class="material-symbols-outlined">search</span>
+        Buscar
+      </button>
+      <button class="secondary-button" type="button">Limpiar</button>
+    </div>
+  </article>
+
+  <article class="content-card history-card">
+    <header class="table-heading">
+      <div>
+        <h3>Resultados del historial</h3>
+        <span>1,248 registros</span>
+      </div>
+
+      <div class="table-actions">
+        <button class="secondary-button compact-button" type="button">
+          <span class="material-symbols-outlined">sim_card_download</span>
+          Excel
+        </button>
+        <button class="secondary-button compact-button" type="button">
+          <span class="material-symbols-outlined">picture_as_pdf</span>
+          PDF
+        </button>
+        <button class="secondary-button square-button" type="button" aria-label="Mas filtros">
+          <span class="material-symbols-outlined">filter_list</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID Viaje</th>
+            <th>Fecha & Hora</th>
+            <th>Placa / Cisterna</th>
+            <th>Conductor</th>
+            <th>Volumen m3</th>
+            <th>Surtidor</th>
+            <th>Estado</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (viaje of viajes; track viaje.id) {
+            <tr>
+              <td class="trip-id">{{ viaje.id }}</td>
+              <td>{{ viaje.fechaHora }}</td>
+              <td>
+                <div class="vehicle-cell">
+                  <span class="material-symbols-outlined">local_shipping</span>
+                  <strong>{{ viaje.placa }}</strong>
+                </div>
+              </td>
+              <td>{{ viaje.conductor }}</td>
+              <td class="mono">{{ viaje.volumen }}</td>
+              <td>{{ viaje.surtidor }}</td>
+              <td><app-status-badge [status]="viaje.estado" /></td>
+              <td class="text-right">
+                <button class="icon-action" type="button" aria-label="Ver detalle">
+                  <span class="material-symbols-outlined">visibility</span>
+                </button>
+                @if (viaje.estado === 'CANCELADO') {
+                  <button class="icon-action danger" type="button" aria-label="Ver incidencia">
+                    <span class="material-symbols-outlined">report_problem</span>
+                  </button>
+                } @else {
+                  <button class="icon-action" type="button" aria-label="Descargar reporte">
+                    <span class="material-symbols-outlined">download</span>
+                  </button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="table-footer">
+      <span>Mostrando 1-5 de 1,248 resultados</span>
+      <div class="pagination">
+        <button disabled type="button"><span class="material-symbols-outlined">chevron_left</span></button>
+        <button class="active" type="button">1</button>
+        <button type="button">2</button>
+        <button type="button">3</button>
+        <span>...</span>
+        <button type="button">250</button>
+        <button type="button"><span class="material-symbols-outlined">chevron_right</span></button>
+      </div>
+    </footer>
+  </article>
+
+  <section class="summary-grid">
+    <article class="content-card volume-card">
+      <div>
+        <span>Resumen del historial</span>
+        <strong>1,450.5 m3</strong>
+      </div>
+      <div class="metric-icon">
+        <span class="material-symbols-outlined">analytics</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <p>
+        <span class="material-symbols-outlined">trending_up</span>
+        Promedio diario de volumen transportado en los resultados consultados.
+      </p>
+    </article>
+  </section>
+</section>

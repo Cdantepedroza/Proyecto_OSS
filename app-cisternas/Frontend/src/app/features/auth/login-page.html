@@ -1,0 +1,82 @@
+<main class="login-page">
+  <section class="login-shell">
+    <article class="login-card">
+      <header class="brand-block">
+        <div class="brand-mark">
+          <span class="material-symbols-outlined">water_drop</span>
+        </div>
+        <h1>Bienvenido a Minaya</h1>
+        <p>Gestion operativa de cisternas</p>
+      </header>
+
+      <form class="login-form" (ngSubmit)="iniciarSesion()">
+        <div class="field">
+          <label for="email">Correo electronico</label>
+          <div class="input-with-icon">
+            <span class="material-symbols-outlined">mail</span>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="usuario@minaya.pe"
+              required
+              [(ngModel)]="email"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="password-label">
+            <label for="password">Contrasena</label>
+            <a href="#">Olvidaste tu contrasena?</a>
+          </div>
+
+          <div class="input-with-icon">
+            <span class="material-symbols-outlined">lock</span>
+            <input
+              id="password"
+              name="password"
+              [type]="mostrarPassword ? 'text' : 'password'"
+              placeholder="********"
+              required
+              [(ngModel)]="password"
+            />
+            <button class="toggle-password" type="button" (click)="alternarPassword()" aria-label="Mostrar contrasena">
+              <span class="material-symbols-outlined">{{ mostrarPassword ? 'visibility_off' : 'visibility' }}</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="primary-button login-button" type="submit" [disabled]="verificando">
+          @if (verificando) {
+            <span class="loader"></span>
+            Verificando...
+          } @else {
+            <span>Iniciar sesion</span>
+            <span class="material-symbols-outlined">login</span>
+          }
+        </button>
+      </form>
+
+      <footer class="login-footer">
+        <p>No tienes acceso? <a href="#">Solicitar acceso</a></p>
+        <div>
+          <span class="material-symbols-outlined">verified_user</span>
+          Conexion segura SSL
+        </div>
+      </footer>
+    </article>
+
+    <nav class="help-links" aria-label="Ayuda">
+      <a href="#">
+        <span class="material-symbols-outlined">help</span>
+        Centro de ayuda
+      </a>
+      <span></span>
+      <a href="#">
+        <span class="material-symbols-outlined">language</span>
+        Espanol
+      </a>
+    </nav>
+  </section>
+</main>

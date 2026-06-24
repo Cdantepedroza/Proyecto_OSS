@@ -1,0 +1,111 @@
+<section class="page-content">
+  <app-page-header
+    title="Dashboard Operativo"
+    description="Resumen en tiempo real de la logistica hidrica."
+  >
+    <button class="secondary-button" type="button">
+      <span class="material-symbols-outlined">calendar_today</span>
+      Hoy, 24 Mayo
+    </button>
+    <button class="primary-button" type="button" routerLink="/viajes/cierre">
+      <span class="material-symbols-outlined">add</span>
+      Nuevo Viaje
+    </button>
+  </app-page-header>
+
+  <div class="kpi-grid">
+    <app-kpi-card title="Viajes del dia" value="42" icon="local_shipping" trend="+12%" />
+    <app-kpi-card title="Volumen transportado" value="125,000 L" icon="opacity" trend="+5%" />
+    <app-kpi-card title="Fichas pendientes" value="15" icon="pending_actions" color="orange" />
+    <app-kpi-card title="Cisternas disponibles" value="8" icon="check_circle" color="green" />
+  </div>
+
+  <div class="analytics-grid">
+    <article class="content-card">
+      <div class="card-heading">
+        <div>
+          <h3>Volumen Transportado</h3>
+          <p>Ultima semana de operacion</p>
+        </div>
+        <span class="material-symbols-outlined">more_vert</span>
+      </div>
+
+      <div class="volume-chart">
+        <div class="volume-bar" style="height: 45%"><span>85k L</span></div>
+        <div class="volume-bar" style="height: 60%"><span>92k L</span></div>
+        <div class="volume-bar" style="height: 55%"><span>88k L</span></div>
+        <div class="volume-bar" style="height: 75%"><span>110k L</span></div>
+        <div class="volume-bar" style="height: 85%"><span>125k L</span></div>
+        <div class="volume-bar" style="height: 70%"><span>105k L</span></div>
+        <div class="volume-bar" style="height: 90%"><span>132k L</span></div>
+      </div>
+
+      <div class="chart-labels">
+        <span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
+      </div>
+    </article>
+
+    <article class="content-card">
+      <div class="card-heading">
+        <div>
+          <h3>Top 5 Cisternas</h3>
+          <p>Rendimiento por numero de viajes</p>
+        </div>
+        <span class="material-symbols-outlined">more_vert</span>
+      </div>
+
+      <div class="ranking-list">
+        <div class="ranking-item">
+          <div><strong>CIS-7042</strong><span>18 viajes</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="ranking-item">
+          <div><strong>CIS-5120</strong><span>15 viajes</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 75%"></div></div>
+        </div>
+        <div class="ranking-item">
+          <div><strong>CIS-8831</strong><span>12 viajes</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 60%"></div></div>
+        </div>
+        <div class="ranking-item">
+          <div><strong>CIS-1290</strong><span>9 viajes</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 45%"></div></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <article class="content-card table-card">
+    <div class="table-heading">
+      <h3>Ultimos viajes registrados</h3>
+      <button type="button" routerLink="/consultas">Ver todos los viajes</button>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cisterna</th>
+            <th>Conductor</th>
+            <th>Zona</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (trip of recentTrips; track trip.id) {
+            <tr>
+              <td>{{ trip.id }}</td>
+              <td><span class="material-symbols-outlined">local_shipping</span>{{ trip.cisterna }}</td>
+              <td>{{ trip.conductor }}</td>
+              <td>{{ trip.zona }}</td>
+              <td><app-status-badge [status]="trip.estado" /></td>
+              <td><button class="row-action" type="button"><span class="material-symbols-outlined">visibility</span></button></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </article>
+</section>

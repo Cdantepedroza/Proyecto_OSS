@@ -1,0 +1,275 @@
+.primary-button {
+  min-height: 44px;
+  padding: 0 20px;
+}
+
+.summary-grid,
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.filter-card,
+.stats-card,
+.table-card,
+.insight-card {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.05);
+}
+
+.filter-card {
+  display: flex;
+  grid-column: span 8;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.filter-label {
+  border-right: 1px solid #d8e3fb;
+  color: #505f76;
+  padding: 0 14px 0 4px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter {
+  min-width: 138px;
+  border: 1px solid #d8e3fb;
+  border-radius: 999px;
+  background: #f0f3ff;
+  color: #505f76;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+
+  &.active {
+    border-color: transparent;
+    background: #dee0ff;
+    color: #002eca;
+  }
+}
+
+.stats-card {
+  display: flex;
+  grid-column: span 4;
+  align-items: center;
+  justify-content: space-around;
+  padding: 16px 28px;
+
+  div:not(.divider) {
+    text-align: center;
+  }
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    color: #143de7;
+    font-size: 24px;
+  }
+
+  span {
+    color: #505f76;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .green {
+    color: #059669;
+  }
+
+  .red {
+    color: #ba1a1a;
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background: #d8e3fb;
+}
+
+.table-card {
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+table {
+  th,
+  td {
+    padding: 16px 24px;
+  }
+
+  tr:hover {
+    background: #f8fbff;
+  }
+}
+
+.plate-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #111c2d;
+}
+
+.truck-icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 7px;
+  background: #d8e3fb;
+  color: #143de7;
+}
+
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #505f76;
+  font-weight: 800;
+
+  span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #505f76;
+  }
+
+  &.available {
+    color: #059669;
+
+    span {
+      background: #059669;
+    }
+  }
+}
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0f3ff;
+  padding: 14px 24px;
+
+  p {
+    margin: 0;
+    color: #505f76;
+    font-size: 12px;
+  }
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+
+  button {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border: 1px solid #c4c5d9;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #111c2d;
+    cursor: pointer;
+
+    &.active {
+      border-color: #143de7;
+      background: #143de7;
+      color: #ffffff;
+      font-weight: 800;
+    }
+  }
+}
+
+.insight-card {
+  display: flex;
+  grid-column: span 4;
+  gap: 16px;
+  padding: 18px;
+
+  h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 0;
+    color: #505f76;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  button {
+    border: 0;
+    background: transparent;
+    color: #143de7;
+    padding: 10px 0 0;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+}
+
+.insight-icon {
+  display: grid;
+  min-width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+
+  &.blue {
+    background: rgba(20, 61, 231, 0.1);
+    color: #143de7;
+  }
+
+  &.gray {
+    background: #eef2f7;
+    color: #505f76;
+  }
+
+  &.green {
+    background: #d1fae5;
+    color: #059669;
+  }
+}
+
+@media (max-width: 1100px) {
+  .filter-card,
+  .stats-card,
+  .insight-card {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 760px) {
+  .filter-card,
+  .table-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .filter-actions,
+  .filter {
+    width: 100%;
+  }
+}

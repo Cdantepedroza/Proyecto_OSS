@@ -1,0 +1,114 @@
+<section class="page-content mis-viajes-page">
+  <app-page-header
+    title="Mis Viajes"
+    description="Consulta tus fichas registradas, revisa estados y continua los viajes pendientes de cierre."
+  >
+    <button class="primary-button" type="button" routerLink="/viajes/cierre">
+      <span class="material-symbols-outlined">assignment_add</span>
+      Registrar viaje
+    </button>
+  </app-page-header>
+
+  <section class="driver-summary">
+    <article class="profile-card">
+      <div class="profile-avatar">FM</div>
+      <div>
+        <span>Conductor asignado</span>
+        <h3>Franks Montes</h3>
+        <p>Licencia A3 | Turno manana | Contratista Minaya</p>
+      </div>
+    </article>
+
+    <div class="summary-cards">
+      @for (item of resumen; track item.label) {
+        <article class="summary-card" [class]="item.color">
+          <div>
+            <span>{{ item.label }}</span>
+            <strong>{{ item.value }}</strong>
+          </div>
+          <span class="material-symbols-outlined">{{ item.icon }}</span>
+        </article>
+      }
+    </div>
+  </section>
+
+  <article class="content-card active-trip-card">
+    <div>
+      <span class="eyebrow">Viaje activo</span>
+      <h3>CF-2024-089 | Sector Norte</h3>
+      <p>El viaje se encuentra en curso. Completa la lectura final y el control del liquido al finalizar el servicio.</p>
+    </div>
+    <button class="primary-button" type="button" routerLink="/viajes/cierre">
+      <span class="material-symbols-outlined">edit_note</span>
+      Continuar registro
+    </button>
+  </article>
+
+  <article class="content-card trips-card">
+    <header class="section-heading">
+      <div>
+        <h3>Fichas registradas</h3>
+        <p>Ultimos servicios enviados durante la jornada.</p>
+      </div>
+      <button class="secondary-button" type="button">
+        <span class="material-symbols-outlined">filter_list</span>
+        Filtrar
+      </button>
+    </header>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Folio</th>
+            <th>Fecha</th>
+            <th>Cisterna</th>
+            <th>Zona</th>
+            <th>Surtidor</th>
+            <th>Volumen</th>
+            <th>Estado</th>
+            <th class="text-right">Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (viaje of viajes; track viaje.folio) {
+            <tr>
+              <td class="folio">{{ viaje.folio }}</td>
+              <td>
+                <strong>{{ viaje.fecha }}</strong>
+                <span>{{ viaje.horaInicio }}</span>
+              </td>
+              <td>
+                <div class="vehicle-cell">
+                  <span class="material-symbols-outlined">local_shipping</span>
+                  {{ viaje.placa }}
+                </div>
+              </td>
+              <td>{{ viaje.zona }}</td>
+              <td>{{ viaje.surtidor }}</td>
+              <td>{{ viaje.volumen }}</td>
+              <td><app-status-badge [status]="viaje.estado" /></td>
+              <td class="text-right">
+                @if (viaje.estado === 'EN_CURSO') {
+                  <button class="secondary-button row-button" type="button" routerLink="/viajes/cierre">Continuar</button>
+                } @else if (viaje.estado === 'OBSERVADA') {
+                  <button class="secondary-button row-button warning" type="button" routerLink="/viajes/cierre">Corregir</button>
+                } @else {
+                  <button class="secondary-button row-button" type="button">Ver detalle</button>
+                }
+              </td>
+            </tr>
+            @if (viaje.observacion) {
+              <tr class="observation-row">
+                <td colspan="8">
+                  <span class="material-symbols-outlined">info</span>
+                  {{ viaje.observacion }}
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </article>
+</section>

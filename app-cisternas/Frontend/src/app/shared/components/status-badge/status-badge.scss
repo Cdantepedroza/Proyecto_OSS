@@ -1,0 +1,51 @@
+.status {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.en-curso {
+  background: rgba(20, 61, 231, 0.1);
+  color: #143de7;
+}
+
+.aprobada,
+.aprobado,
+.disponible,
+.activo,
+.completado {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.pendiente,
+.pendiente-revision,
+.pendiente-activacion {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.observada,
+.vencido,
+.bloqueado,
+.fuera-servicio {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.mantenimiento {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.en-progreso {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.cancelado {
+  background: #fee2e2;
+  color: #b91c1c;
+}

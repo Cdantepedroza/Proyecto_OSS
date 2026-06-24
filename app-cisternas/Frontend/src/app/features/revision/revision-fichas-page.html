@@ -1,0 +1,237 @@
+<section class="page-content revision-page">
+  <app-page-header
+    title="Revision de Fichas de Viaje"
+    description="Valida y aprueba las entregas de agua realizadas por la flota."
+  >
+    <div class="pending-counter">
+      <strong>12</strong>
+      <span>Pendientes</span>
+    </div>
+  </app-page-header>
+
+  <div class="review-grid">
+    <article class="content-card table-card">
+      <header class="section-heading">
+        <h3>Fichas en estado pendiente</h3>
+        <button class="secondary-button compact-button" type="button">
+          <span class="material-symbols-outlined">filter_list</span>
+          Filtrar
+        </button>
+      </header>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Vehiculo</th>
+              <th>Conductor</th>
+              <th>Ayudante</th>
+              <th>Zona</th>
+              <th>Surtidor</th>
+              <th>Volumen</th>
+              <th>Estado</th>
+              <th class="text-right">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (ficha of fichas; track ficha.id) {
+              <tr
+                class="review-row"
+                [class.selected]="fichaSeleccionada?.id === ficha.id"
+                (click)="seleccionarFicha(ficha)"
+              >
+                <td>
+                  <strong>{{ ficha.fecha }}</strong>
+                  <span>{{ ficha.hora }}</span>
+                </td>
+                <td>
+                  <div class="vehicle-cell">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                    <strong>{{ ficha.vehiculo }}</strong>
+                  </div>
+                </td>
+                <td>{{ ficha.conductor }}</td>
+                <td>{{ ficha.ayudante }}</td>
+                <td>
+                  <strong>{{ ficha.zona }}</strong>
+                </td>
+                <td>{{ ficha.surtidor }}</td>
+                <td><span class="volume">{{ ficha.volumen }}</span></td>
+                <td><app-status-badge status="PENDIENTE" /></td>
+                <td class="text-right">
+                  <button class="secondary-button row-button" type="button">Ver detalle</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="table-footer">
+        <span>Mostrando 7 de 12 fichas pendientes</span>
+        <div class="pagination">
+          <button type="button"><span class="material-symbols-outlined">chevron_left</span></button>
+          <button class="active" type="button">1</button>
+          <button type="button"><span class="material-symbols-outlined">chevron_right</span></button>
+        </div>
+      </footer>
+    </article>
+
+    <aside class="detail-panel">
+      @if (!fichaSeleccionada) {
+        <div class="empty-detail">
+          <div>
+            <span class="material-symbols-outlined">description</span>
+          </div>
+          <h4>Sin seleccion</h4>
+          <p>Haz clic en una fila de la tabla para ver y validar los detalles del viaje capturados en campo.</p>
+        </div>
+      } @else {
+        <article class="content-card detail-card">
+          <header class="detail-header">
+            <div>
+              <span>{{ fichaSeleccionada.id }}</span>
+              <h3>{{ fichaSeleccionada.conductor }}</h3>
+              <p>Vehiculo: Placa {{ fichaSeleccionada.vehiculo }} | Ayudante: {{ fichaSeleccionada.ayudante }}</p>
+            </div>
+            <button class="icon-action" type="button" (click)="cerrarDetalle()">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </header>
+
+          <div class="detail-body">
+            <div class="evidence-grid">
+              <article>
+                <p>Foto del odometro</p>
+                <div class="evidence-box">
+                  <span class="material-symbols-outlined">speed</span>
+                  <strong>Odometro</strong>
+                </div>
+              </article>
+              <article>
+                <p>Foto recibo/vale</p>
+                <div class="evidence-box">
+                  <span class="material-symbols-outlined">receipt_long</span>
+                  <strong>Vale</strong>
+                </div>
+              </article>
+            </div>
+
+            <dl class="detail-list">
+              <div>
+                <dt>Contratista</dt>
+                <dd>{{ fichaSeleccionada.contratista }}</dd>
+              </div>
+              <div>
+                <dt>Surtidor</dt>
+                <dd>{{ fichaSeleccionada.surtidor }}</dd>
+              </div>
+              <div>
+                <dt>Volumen entregado</dt>
+                <dd>{{ fichaSeleccionada.volumen }}</dd>
+              </div>
+              <div>
+                <dt>Punto de entrega</dt>
+                <dd>{{ fichaSeleccionada.puntoEntrega }}</dd>
+              </div>
+              <div>
+                <dt>Coordenadas GPS</dt>
+                <dd>{{ fichaSeleccionada.coordenadas }}</dd>
+              </div>
+              <div>
+                <dt>Tiempo en ruta</dt>
+                <dd>{{ fichaSeleccionada.tiempoRuta }}</dd>
+              </div>
+            </dl>
+
+            <div class="metric-grid">
+              <article>
+                <span>Lectura inicial</span>
+                <strong>{{ fichaSeleccionada.lecturaInicial }}</strong>
+              </article>
+              <article>
+                <span>Lectura final</span>
+                <strong>{{ fichaSeleccionada.lecturaFinal }}</strong>
+              </article>
+              <article>
+                <span>Cloro residual</span>
+                <strong>{{ fichaSeleccionada.cloroResidual }}</strong>
+              </article>
+            </div>
+
+            <div class="driver-note">
+              <strong>Observaciones del conductor</strong>
+              <p>"{{ fichaSeleccionada.observaciones }}"</p>
+            </div>
+          </div>
+
+          <footer class="button-group-equal review-actions">
+            <button class="danger-button" type="button" (click)="abrirObservacion()">
+              <span class="material-symbols-outlined">cancel</span>
+              Observar
+            </button>
+            <button class="success-button" type="button" (click)="aprobarFicha()">
+              <span class="material-symbols-outlined">check_circle</span>
+              Aprobar
+            </button>
+          </footer>
+        </article>
+      }
+    </aside>
+  </div>
+
+  @if (mostrarModal) {
+    <div class="modal-backdrop">
+      <article class="observation-modal">
+        <header>
+          <h3>Observar ficha</h3>
+          <button class="icon-action" type="button" (click)="cerrarObservacion()">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </header>
+
+        <div class="modal-body">
+          <div class="warning-box">
+            <span class="material-symbols-outlined">report_problem</span>
+            <p>La ficha sera devuelta al conductor para correccion.</p>
+          </div>
+
+          <div class="field">
+            <label for="motivo">Motivo de observacion</label>
+            <select id="motivo" name="motivo" [(ngModel)]="motivoObservacion">
+              <option>Imagen del odometro ilegible</option>
+              <option>Discrepancia en volumen reportado</option>
+              <option>Error en punto de entrega</option>
+              <option>Faltan firmas en vale/recibo</option>
+              <option>Otro motivo</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="detalle">Detalles adicionales</label>
+            <textarea
+              id="detalle"
+              name="detalle"
+              rows="4"
+              placeholder="Escribe aqui los detalles para el conductor..."
+              [(ngModel)]="detalleObservacion"
+            ></textarea>
+          </div>
+        </div>
+
+        <footer class="button-group-equal">
+          <button class="secondary-button" type="button" (click)="cerrarObservacion()">Cancelar</button>
+          <button class="primary-button" type="button" (click)="enviarObservacion()">Enviar a conductor</button>
+        </footer>
+      </article>
+    </div>
+  }
+
+  @if (toastMensaje) {
+    <div class="toast">
+      <span class="material-symbols-outlined">{{ toastIcono }}</span>
+      <strong>{{ toastMensaje }}</strong>
+    </div>
+  }
+</section>

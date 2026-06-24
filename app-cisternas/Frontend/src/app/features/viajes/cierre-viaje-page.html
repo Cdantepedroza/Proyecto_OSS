@@ -1,0 +1,278 @@
+<section class="page-content cierre-viaje">
+  <app-page-header
+    title="Registro de Viaje"
+    description="Completa la ficha digital del servicio: datos generales, carga inicial, descarga y envio a revision."
+  >
+    <app-status-badge [status]="estadoFormulario" />
+  </app-page-header>
+
+  <div class="breadcrumb">
+    <span>Logistica</span>
+    <span>/</span>
+    <span>Registro de Viaje</span>
+    <span>/</span>
+    <strong>Ficha digital</strong>
+  </div>
+
+  <div class="flow-steps">
+    <article class="active">
+      <span>1</span>
+      <div>
+        <strong>Datos generales</strong>
+        <p>Conductor, unidad y ruta asignada</p>
+      </div>
+    </article>
+    <article class="active">
+      <span>2</span>
+      <div>
+        <strong>Carga inicial</strong>
+        <p>Lectura, surtidor y tipo de liquido</p>
+      </div>
+    </article>
+    <article>
+      <span>3</span>
+      <div>
+        <strong>Descarga y cierre</strong>
+        <p>Lectura final, volumen y control</p>
+      </div>
+    </article>
+    <article>
+      <span>4</span>
+      <div>
+        <strong>Revision</strong>
+        <p>Envio al supervisor operativo</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="closure-grid">
+    <aside class="summary-column">
+      <article class="trip-summary">
+        <div class="summary-top">
+          <span>FOLIO: {{ viaje.folio }}</span>
+          <span class="material-symbols-outlined">info</span>
+        </div>
+
+        <div class="summary-list">
+          <div class="summary-item">
+            <div class="summary-icon"><span class="material-symbols-outlined">person</span></div>
+            <div>
+              <span>Conductor</span>
+              <strong>{{ viaje.conductor }}</strong>
+            </div>
+          </div>
+
+          <div class="summary-item">
+            <div class="summary-icon"><span class="material-symbols-outlined">engineering</span></div>
+            <div>
+              <span>Ayudante</span>
+              <strong>{{ viaje.ayudante }}</strong>
+            </div>
+          </div>
+
+          <div class="summary-item">
+            <div class="summary-icon"><span class="material-symbols-outlined">badge</span></div>
+            <div>
+              <span>Placa</span>
+              <strong>{{ viaje.placa }}</strong>
+            </div>
+          </div>
+
+          <div class="summary-item">
+            <div class="summary-icon"><span class="material-symbols-outlined">explore</span></div>
+            <div>
+              <span>Zona</span>
+              <strong>{{ viaje.zona }}</strong>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="info-note">
+        <span class="material-symbols-outlined">priority_high</span>
+        <div>
+          <strong>Nota informativa</strong>
+          <p>Al enviar la ficha, el viaje cambiara a PENDIENTE_REVISION y quedara disponible para el supervisor operativo.</p>
+        </div>
+      </article>
+    </aside>
+
+    <article class="content-card closure-form-card">
+      <h3>
+        <span class="material-symbols-outlined">assignment</span>
+        Ficha digital del servicio
+      </h3>
+
+      <form class="closure-form" (ngSubmit)="finalizarViaje()">
+        <section class="form-section full">
+          <header>
+            <span class="material-symbols-outlined">fact_check</span>
+            <div>
+              <h4>Datos generales</h4>
+              <p>Informacion base de la ficha asignada.</p>
+            </div>
+          </header>
+
+          <div class="section-grid">
+            <div class="field">
+              <label>Fecha</label>
+              <input type="text" [value]="viaje.fecha" readonly />
+            </div>
+
+            <div class="field">
+              <label>Folio</label>
+              <input type="text" [value]="viaje.folio" readonly />
+            </div>
+
+            <div class="field">
+              <label>Conductor</label>
+              <input type="text" [value]="viaje.conductor" readonly />
+            </div>
+
+            <div class="field">
+              <label>Ayudante</label>
+              <input type="text" [value]="viaje.ayudante" readonly />
+            </div>
+
+            <div class="field">
+              <label>Cisterna / placa</label>
+              <input type="text" [value]="viaje.placa + ' | ' + viaje.capacidad" readonly />
+            </div>
+
+            <div class="field">
+              <label>Punto de destino</label>
+              <input type="text" [value]="viaje.puntoDestino" readonly />
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section full">
+          <header>
+            <span class="material-symbols-outlined">water_drop</span>
+            <div>
+              <h4>Carga inicial</h4>
+              <p>Datos capturados al iniciar el servicio.</p>
+            </div>
+          </header>
+
+          <div class="section-grid">
+            <div class="field">
+              <label for="horaInicio">Hora de inicio</label>
+              <input id="horaInicio" name="horaInicio" type="time" required [(ngModel)]="horaInicio" />
+            </div>
+
+            <div class="field">
+              <label for="surtidor">Surtidor</label>
+              <input id="surtidor" type="text" [value]="viaje.surtidor" readonly />
+            </div>
+
+            <div class="field">
+              <label for="tipoLiquido">Tipo de liquido</label>
+              <select id="tipoLiquido" name="tipoLiquido" [(ngModel)]="tipoLiquido">
+                <option>Agua potable</option>
+                <option>Industrial</option>
+                <option>Tratada</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="valeCarga">Nro. vale de carga</label>
+              <input id="valeCarga" name="valeCarga" type="text" [(ngModel)]="valeCarga" />
+            </div>
+
+            <div class="field">
+              <label for="lecturaInicial">Lectura inicial (Lts)</label>
+              <input id="lecturaInicial" type="number" [value]="viaje.lecturaInicial" readonly />
+              <span class="hint">Bloqueado: valor registrado al iniciar el viaje</span>
+            </div>
+
+            <div class="evidence-slot">
+              <span class="material-symbols-outlined">photo_camera</span>
+              <strong>Evidencia de carga</strong>
+              <p>Foto del macromedidor o vale inicial</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section full">
+          <header>
+            <span class="material-symbols-outlined">assignment_turned_in</span>
+            <div>
+              <h4>Descarga y cierre</h4>
+              <p>Completa la informacion final antes de enviar la ficha.</p>
+            </div>
+          </header>
+
+          <div class="section-grid">
+            <div class="field">
+              <label for="horaFin">Hora de termino</label>
+              <input id="horaFin" name="horaFin" type="time" required [(ngModel)]="horaFin" />
+            </div>
+
+            <div class="field">
+              <label for="lecturaFinal">Lectura final (Lts)</label>
+              <input
+                id="lecturaFinal"
+                name="lecturaFinal"
+                type="number"
+                required
+                placeholder="0"
+                [(ngModel)]="lecturaFinal"
+              />
+            </div>
+
+            <div class="field">
+              <label>Volumen distribuido total</label>
+              <div class="volume-box" [class.error]="volumenDistribuido < 0">
+                <strong>{{ volumenTexto }}</strong>
+                <span class="material-symbols-outlined">calculate</span>
+              </div>
+              <span class="hint">Calculo automatico: lectura final menos lectura inicial</span>
+            </div>
+
+            <div class="field">
+              <label for="cloroResidual">Cloro residual (mg/L)</label>
+              <input
+                id="cloroResidual"
+                name="cloroResidual"
+                type="number"
+                step="0.1"
+                required
+                placeholder="Ej: 0.5"
+                [(ngModel)]="cloroResidual"
+              />
+            </div>
+
+            <div class="evidence-slot">
+              <span class="material-symbols-outlined">receipt_long</span>
+              <strong>Evidencia de descarga</strong>
+              <p>Foto del vale, firma o lectura final</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="field full">
+          <label for="observaciones">Observaciones adicionales</label>
+          <textarea
+            id="observaciones"
+            name="observaciones"
+            rows="3"
+            placeholder="Describe cualquier incidencia relevante durante el trayecto..."
+            [(ngModel)]="observaciones"
+          ></textarea>
+        </div>
+
+        <div class="button-group-equal full">
+          <button class="primary-button" type="submit">
+            <span class="material-symbols-outlined">task_alt</span>
+            Enviar a revision
+          </button>
+          <button class="secondary-button" type="button" (click)="cancelar()">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Cancelar y volver
+          </button>
+        </div>
+      </form>
+    </article>
+  </div>
+</section>
