@@ -7,14 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.upc.open.software.source.g2.models.responses.ContractorResponse;
 import org.upc.open.software.source.g2.services.ContractorService;
 
-@Path("/contractor")
+@Path("/minaya/contratista")
 @RequiredArgsConstructor
 public class ContractorController {
 
     public final ContractorService contractorService;
 
     @GET
-    @Path("/contractors")
     public List<ContractorResponse> getContractors() {
         return contractorService.getContractors();
     }
