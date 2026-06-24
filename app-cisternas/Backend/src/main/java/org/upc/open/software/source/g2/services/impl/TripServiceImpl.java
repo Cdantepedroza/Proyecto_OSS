@@ -5,7 +5,7 @@ import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import org.upc.open.software.source.g2.models.Trip;
+import org.upc.open.software.source.g2.models.persistence.Trip;
 import org.upc.open.software.source.g2.models.responses.TripResponse;
 import org.upc.open.software.source.g2.services.TripService;
 
