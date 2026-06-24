@@ -1,4 +1,4 @@
-package org.upc.open.software.source.g2.models;
+package org.upc.open.software.source.g2.models.persistence;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,9 +10,8 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-
 import java.time.LocalDateTime;
+import lombok.*;
 
 @Entity
 @Table(
@@ -51,7 +50,7 @@ public class User {
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = "password", nullable = false, length = 255)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @NotBlank
