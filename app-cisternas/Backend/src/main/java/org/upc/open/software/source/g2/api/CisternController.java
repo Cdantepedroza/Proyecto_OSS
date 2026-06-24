@@ -7,13 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.upc.open.software.source.g2.models.responses.CisternResponse;
 import org.upc.open.software.source.g2.services.CisternService;
 
-@Path("/cistern")
+@Path("/minaya/cisternas")
 @RequiredArgsConstructor
 public class CisternController {
     private final CisternService cisterService;
 
     @GET
-    @Path("/cisterns")
     public List<CisternResponse> getCisterns() {
         return cisterService.getCisterns();
     }
